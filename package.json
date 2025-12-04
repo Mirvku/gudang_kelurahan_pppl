@@ -7,9 +7,6 @@
     "build": "next build",
     "start": "next start"
   },
-  "prisma": {
-    "seed": "ts-node --transpile-only prisma/seed.ts"
-  },
   "dependencies": {
     "@auth/pg-adapter": "^1.11.1",
     "@auth/prisma-adapter": "^2.11.1",

@@ -18,9 +18,9 @@ const BarangKeluarPage = async ({
   const query = params?.query || "";
   const sort = params?.sort || "";
 
-  const totalPages = await fetchTotalBarangKeluarPages(query);
-  const totalItems = await fetchTotalBarangKeluarCount(query);
-  const rawData = await fetchDataBarangKeluar(query, currentPage, sort);
+  const totalPages = await fetchTotalBarangKeluarPages(query, "", "");
+  const totalItems = await fetchTotalBarangKeluarCount(query, "", "");
+  const rawData = await fetchDataBarangKeluar(query, currentPage, "", "", sort);
   const items = await fetchAllBarang();
 
   // Serialize data

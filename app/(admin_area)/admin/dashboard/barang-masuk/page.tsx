@@ -16,9 +16,9 @@ const BarangMasukPage = async ({
   const query = params?.query || "";
   const sort = params?.sort || "";
 
-  const totalPages = await fetchTotalBarangMasukPages(query);
-  const totalItems = await fetchTotalBarangMasukCount(query);
-  const rawData = await fetchDataBarangMasuk(query, currentPage, sort);
+  const totalPages = await fetchTotalBarangMasukPages(query, "", "");
+  const totalItems = await fetchTotalBarangMasukCount(query, "", "");
+  const rawData = await fetchDataBarangMasuk(query, currentPage, "", "", sort);
 
   // Serialize data (convert Date objects to strings)
   const data = rawData.map((item) => ({
