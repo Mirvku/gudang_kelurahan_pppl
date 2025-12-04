@@ -65,27 +65,29 @@ const Topbar = ({ user, onMenuClick }: TopbarProps) => {
           </div>
 
           {/* Logout */}
-          <button
-            onClick={() => logoutAction()}
-            className="w-full flex items-center gap-3 px-4 py-2 hover:bg-gray-100 text-left transition-colors rounded-md mt-1"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5 text-gray-600"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
+          <form action={logoutAction}>
+            <button
+              type="submit"
+              className="w-full flex items-center gap-3 px-4 py-2 hover:bg-gray-100 text-left transition-colors rounded-md mt-1"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 12H3m12 0l-4-4m4 4l-4 4m10-10v12a2 2 0 01-2 2H7"
-              />
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5 text-gray-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15 12H3m12 0l-4-4m4 4l-4 4m10-10v12a2 2 0 01-2 2H7"
+                />
+              </svg>
 
-            <span className="text-gray-700">Logout</span>
-          </button>
+              <span className="text-gray-700">Logout</span>
+            </button>
+          </form>
         </div>
       )}
     </div>

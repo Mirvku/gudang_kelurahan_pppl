@@ -9,6 +9,7 @@ import { compareSync } from "bcrypt-ts";
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma) as Adapter,
   session: { strategy: "jwt" },
+  trustHost: true,
   pages: {
     signIn: "/login",
   },
