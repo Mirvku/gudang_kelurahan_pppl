@@ -24,6 +24,7 @@ export default function DashboardLayoutClient({
       <Sidebar
         isMobileOpen={isMobileSidebarOpen}
         onMobileClose={() => setIsMobileSidebarOpen(false)}
+        user={user}
       />
 
       {/* MAIN CONTENT AREA */}

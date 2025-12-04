@@ -1,7 +1,8 @@
 import React from "react";
 import { prisma } from "@/lib/prisma";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import FormEditAkun from "@/components/FormEditAkun";
+import { auth } from "@/auth";
 
 interface EditUserPageProps {
   params: Promise<{
@@ -10,6 +11,11 @@ interface EditUserPageProps {
 }
 
 export default async function EditUserPage({ params }: EditUserPageProps) {
+  const session = await auth();
+  if (session?.user?.role !== "admin") {
+    redirect("/admin/dashboard");
+  }
+
   const { id } = await params;
   const user = await prisma.user.findUnique({
     where: {

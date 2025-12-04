@@ -12,7 +12,7 @@ import { prisma } from "@/lib/prisma";
 import { hashSync } from "bcrypt-ts";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { signIn, signOut } from "@/auth";
+import { signIn, signOut, auth } from "@/auth";
 import { AuthError } from "next-auth";
 
 // Ini function untuk handle loginnya.
@@ -531,6 +531,10 @@ export const deleteBarangMasukAction = async (id_barang_masuk: number) => {
 };
 
 export const createUserAction = async (prevState: any, formData: FormData) => {
+  const session = await auth();
+  if (session?.user?.role !== "admin") {
+    return { success: false, message: "Unauthorized" };
+  }
   const validateFields = CreateUserSchema.safeParse(
     Object.fromEntries(formData.entries())
   );
@@ -582,6 +586,10 @@ export const createUserAction = async (prevState: any, formData: FormData) => {
 };
 
 export const updateUserAction = async (prevState: any, formData: FormData) => {
+  const session = await auth();
+  if (session?.user?.role !== "admin") {
+    return { success: false, message: "Unauthorized" };
+  }
   const validateFields = UpdateUserSchema.safeParse(
     Object.fromEntries(formData.entries())
   );

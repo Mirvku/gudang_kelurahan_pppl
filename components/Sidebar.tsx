@@ -7,9 +7,17 @@ import { FaTimes } from "react-icons/fa";
 interface SidebarProps {
   isMobileOpen?: boolean;
   onMobileClose?: () => void;
+  user?: {
+    name?: string | null;
+    role?: string | null;
+  };
 }
 
-const Sidebar = ({ isMobileOpen = false, onMobileClose }: SidebarProps) => {
+const Sidebar = ({
+  isMobileOpen = false,
+  onMobileClose,
+  user,
+}: SidebarProps) => {
   const pathname = usePathname();
   const [openManajemen, setOpenManajemen] = useState(false);
   const [openLaporan, setOpenLaporan] = useState(false);
@@ -289,27 +297,30 @@ const Sidebar = ({ isMobileOpen = false, onMobileClose }: SidebarProps) => {
           </Link>
 
           {/* MENAJEMEN AKUN */}
-          <Link href="/admin/dashboard/manajemen-akun">
-            <div
-              onClick={() => handleMenuClick("manajemenAkun")}
-              className={`${baseClass} ${
-                activeMenu === "manajemenAkun" ? activeClass : inactiveClass
-              }
-                        ${collapsed ? "justify-center" : ""} mb-3 `}
-            >
-              <img
-                src={
-                  activeMenu === "manajemenAkun"
-                    ? "/m_akun_white_icon.png"
-                    : "/m_akun_icon.png"
+          {/* MENAJEMEN AKUN - Hanya untuk ADMIN */}
+          {user?.role === "admin" && (
+            <Link href="/admin/dashboard/manajemen-akun">
+              <div
+                onClick={() => handleMenuClick("manajemenAkun")}
+                className={`${baseClass} ${
+                  activeMenu === "manajemenAkun" ? activeClass : inactiveClass
                 }
-                alt="manajemen akun"
-                className="w-5 h-5"
-              />
+                        ${collapsed ? "justify-center" : ""} mb-3 `}
+              >
+                <img
+                  src={
+                    activeMenu === "manajemenAkun"
+                      ? "/m_akun_white_icon.png"
+                      : "/m_akun_icon.png"
+                  }
+                  alt="manajemen akun"
+                  className="w-5 h-5"
+                />
 
-              {!collapsed && "Manajemen Akun"}
-            </div>
-          </Link>
+                {!collapsed && "Manajemen Akun"}
+              </div>
+            </Link>
+          )}
 
           {/* LAPORAN */}
           <div

@@ -1,6 +1,8 @@
 import React from "react";
 import ManajemenAkunClient from "@/components/ManajemenAkunClient";
 import { fetchUsers, fetchTotalUsers, fetchUsersPages } from "@/data/user";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export default async function ManajemenAkunPage({
   searchParams,
@@ -16,6 +18,11 @@ export default async function ManajemenAkunPage({
   const currentPage = Number(params.page) || 1;
   const sort = params.sort || "";
   const itemsPerPage = 5;
+
+  const session = await auth();
+  if (session?.user?.role !== "admin") {
+    redirect("/admin/dashboard");
+  }
 
   const data = await fetchUsers(query, currentPage, itemsPerPage, sort);
   const totalPages = await fetchUsersPages(query, itemsPerPage);

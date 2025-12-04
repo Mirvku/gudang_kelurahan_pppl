@@ -3,7 +3,13 @@
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
+import { auth } from "@/auth";
+
 export async function deleteUser(id: string) {
+  const session = await auth();
+  if (session?.user?.role !== "admin") {
+    return { success: false, message: "Unauthorized" };
+  }
   try {
     // Cek apakah user ada
     const user = await prisma.user.findUnique({
