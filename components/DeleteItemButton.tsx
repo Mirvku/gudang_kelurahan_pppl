@@ -47,7 +47,7 @@ export default function DeleteItemButton({
               <h3 className="text-lg font-bold text-gray-900 mb-2">
                 Hapus Barang?
               </h3>
-              <p className="text-gray-500 text-sm mb-6 break-words whitespace-normal">
+              <p className="text-gray-500 text-sm mb-6 wrap-break-word whitespace-normal">
                 Apakah Anda yakin ingin menghapus <strong>{nama_barang}</strong>
                 ? Tindakan ini tidak dapat dibatalkan.
               </p>
